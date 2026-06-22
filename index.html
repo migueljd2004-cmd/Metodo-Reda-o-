@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reduz a quantidade de dados enviados pra outros sites quando alguém clica em um link daqui -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Método Redação 900+ — MissãoVest</title>
+    <!-- Tailwind CSS CDN para renderização imediata -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ⚠️ Nota: o Tailwind via CDN é ótimo pra prototipar rápido, mas o próprio Tailwind
+         recomenda NÃO usar essa versão em produção (sem purge, mais lento, gera aviso
+         no console). Quando o site estiver validado, considere migrar pro Tailwind CLI
+         ou framework (Next.js, Vite, etc.) antes de escalar o tráfego pago. -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            deep: '#060c1a',
+                            dark: '#0d1b33',
+                            mid: '#16294a',
+                        },
+                        gold: {
+                            DEFAULT: '#f6b80c',
+                            light: '#ffe28a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ============================================================
+         🔒 CONFIGURAÇÃO DO GATEWAY DE PAGAMENTO — EDITE SÓ AQUI
+         ============================================================
+         Troque "COLOQUE_AQUI_O_LINK_DO_SEU_CHECKOUT" pelo link de
+         checkout do seu gateway (Mercado Pago, PagSeguro, Stripe
+         Checkout, Hotmart, Kiwify, Eduzz, etc).
+
+         REGRA DE OURO: esta página é 100% client-side (roda só no
+         navegador). Qualquer coisa escrita aqui é visível pra
+         qualquer pessoa que abrir "Ver código-fonte". Por isso:
+
+         ✅ PODE colocar aqui: link público de checkout (página de
+            pagamento do gateway), client_id/public_key públicas
+            (quando o próprio gateway chama isso de "pública" ou
+            "publishable key" — ex: Stripe publishable key).
+
+         ❌ NUNCA coloque aqui: secret key, access token de API,
+            client_secret, senha de banco, chave de webhook, ou
+            qualquer credencial que o gateway chame de "secreta"
+            ou "privada". Isso só pode existir no backend/servidor,
+            normalmente carregado de variáveis de ambiente (.env).
+            Veja o arquivo .env.example incluso para o padrão
+            recomendado caso você crie um backend (ex: para gerar a
+            sessão de checkout via API antes de redirecionar o
+            cliente, em vez de usar um link fixo).
+         ============================================================ -->
+    <script>
+        window.MISSAOVEST_CONFIG = {
+            checkoutUrl: "COLOQUE_AQUI_O_LINK_DO_SEU_CHECKOUT"
+        };
+    </script>
+</head>
+<body class="min-h-screen bg-[#060c1a] text-slate-100 font-sans antialiased selection:bg-[#f6b80c] selection:text-[#060c1a]">
+
+    <!-- BARRA DE URGÊNCIA TOPO -->
+    <div class="bg-gradient-to-r from-red-600 to-amber-600 text-white text-center py-2.5 px-4 text-xs md:text-sm font-bold tracking-wide uppercase shadow-inner animate-pulse">
+        ⏳ Atenção: Faltam menos de 5 meses para o ENEM 2026! Não perca tempo.
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-12 pb-20 md:py-28 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d1b33] to-[#060c1a]">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Texto Principal -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6 z-10">
+                <span class="inline-block bg-[#f6b80c] text-[#060c1a] font-black text-xs md:text-sm px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                    Pare de travar na redação
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+                    Aprenda uma estrutura simples para escrever redações <span class="text-[#f6b80c]">nota 900+</span>
+                </h1>
+                <p class="text-base md:text-xl text-slate-300 font-medium max-w-xl mx-auto lg:mx-0">
+                    Mesmo que você nunca tenha conseguido desenvolver um texto ou sofra para começar a introdução. Direto ao ponto, sem enrolação.
+                </p>
+                
+                <!-- Preço e CTA -->
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <button onclick="document.getElementById('oferta').scrollIntoView({ behavior: 'smooth' })" class="w-full sm:w-auto bg-gradient-to-b from-[#ffe28a] to-[#f6b80c] text-[#060c1a] font-black text-base md:text-lg px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(246,184,12,0.3)] hover:scale-105 transition-all uppercase tracking-wide cursor-pointer">
+                        Quero destravar minha redação
+                    </button>
+                    <div class="text-left text-xs text-slate-400">
+                        <span class="line-through block">De R$ 79</span>
+                        <span class="text-white font-bold text-sm">Por apenas <span class="text-[#ffe28a] text-lg">R$ 37,99</span></span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center lg:justify-start gap-6 text-xs text-slate-400 pt-2">
+                    <span class="flex items-center gap-1.5">⚡ Acesso imediato</span>
+                    <span class="flex items-center gap-1.5">🛡️ Garantia de 7 dias</span>
+                </div>
+            </div>
+
+            <!-- Mockup Visual -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="absolute inset-0 bg-[#f6b80c] opacity-10 blur-3xl rounded-full"></div>
+                <div class="relative bg-[#16294a] border border-white/10 p-6 rounded-2xl shadow-2xl max-w-sm w-full backdrop-blur-sm transform hover:rotate-1 transition-transform">
+                    <div class="bg-[#0d1b33] h-48 rounded-xl flex flex-col items-center justify-center p-4 border border-white/5 text-center">
+                        <span class="text-2xl font-black text-white tracking-wider">MÉTODO REDAÇÃO 900+</span>
+                        <span class="text-xs text-[#f6b80c] font-bold mt-1 uppercase">Kit Digital Completo</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <div class="bg-[#0d1b33]/60 p-3 rounded-lg border border-white/5 text-center">
+                          <span class="block font-bold text-xs text-[#ffe28a]">BÔNUS 1</span>
+                          <span class="text-[11px] text-slate-300">50 Frases Coringa</span>
+                        </div>
+                        <div class="bg-[#0d1b33]/60 p-3 rounded-lg border border-white/5 text-center">
+                          <span class="block font-bold text-xs text-[#ffe28a]">BÔNUS 2</span>
+                          <span class="text-[11px] text-slate-300">30 Repertórios</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-[#10b981]/10 text-[#10b981] text-xs font-bold py-2 rounded-lg text-center border border-[#10b981]/20">
+                        ⭐ Oferta Especial: R$ 37,99
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- SEÇÃO DE DOR -->
+    <section class="py-16 bg-[#0d1b33]/40 border-t border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-center text-white mb-4">Você se identifica com alguma dessas situações?</h2>
+            <p class="text-slate-400 text-center mb-10 max-w-lg mx-auto text-sm md:text-base">
+                Escrever para o vestibular não precisa ser uma tortura mental. Veja o que costuma travar sua nota:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start gap-3 bg-[#112240] p-4 rounded-xl border border-red-500/10"><span class="text-red-400 font-bold">✕</span><p class="text-slate-300 text-sm md:text-base">Não sabe como começar a introdução e perde minutos preciosos.</p></div>
+                <div class="flex items-start gap-3 bg-[#112240] p-4 rounded-xl border border-red-500/10"><span class="text-red-400 font-bold">✕</span><p class="text-slate-300 text-sm md:text-base">Trava na metade do desenvolvimento e sente que está repetindo palavras.</p></div>
+                <div class="flex items-start gap-3 bg-[#112240] p-4 rounded-xl border border-red-500/10"><span class="text-red-400 font-bold">✕</span><p class="text-slate-300 text-sm md:text-base">Fica totalmente sem repertório sociocultural na hora de validar os argumentos.</p></div>
+                <div class="flex items-start gap-3 bg-[#112240] p-4 rounded-xl border border-red-500/10"><span class="text-red-400 font-bold">✕</span><p class="text-slate-300 text-sm md:text-base">Não consegue concluir a redação respeitando todos os critérios exigidos pelo MEC.</p></div>
+                <div class="flex items-start gap-3 bg-[#112240] p-4 rounded-xl border border-red-500/10 md:col-span-2"><span class="text-red-400 font-bold">✕</span><p class="text-slate-300 text-sm md:text-base text-center w-full">Tem medo constante de tirar uma nota baixa e arruinar a média do ENEM.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O QUE VAI APRENDER -->
+    <section class="py-20 max-w-5xl mx-auto px-4">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-center text-white mb-12">O que você vai dominar com o <span class="text-[#f6b80c]">Método</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-[#0d1b33] p-6 rounded-xl border border-white/5 shadow-xl hover:border-[#10b981]/30 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-[#10b981]/10 text-[#10b981] flex items-center justify-center font-bold mb-4 group-hover:bg-[#10b981] group-hover:text-[#060c1a] transition-all">✓</div>
+                <h3 class="text-white font-bold text-lg mb-2">Estrutura Pronta</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Uma engrenagem lógica adaptável para qualquer tema que o ENEM escolher em 2026.</p>
+            </div>
+            <div class="bg-[#0d1b33] p-6 rounded-xl border border-white/5 shadow-xl hover:border-[#10b981]/30 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-[#10b981]/10 text-[#10b981] flex items-center justify-center font-bold mb-4 group-hover:bg-[#10b981] group-hover:text-[#060c1a] transition-all">✓</div>
+                <h3 class="text-white font-bold text-lg mb-2">Introduções Rápidas</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Modelos de abertura de texto para você começar a escrever nos primeiros 5 minutos.</p>
+            </div>
+            <div class="bg-[#0d1b33] p-6 rounded-xl border border-white/5 shadow-xl hover:border-[#10b981]/30 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-[#10b981]/10 text-[#10b981] flex items-center justify-center font-bold mb-4 group-hover:bg-[#10b981] group-hover:text-[#060c1a] transition-all">✓</div>
+                <h3 class="text-white font-bold text-lg mb-2">Intervenção Perfeita</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Feche os 5 elementos obrigatórios da Proposta de Intervenção para garantir os 200 pontos na Competência 5.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE BÔNUS EXCLUSIVOS -->
+    <section class="py-16 bg-[#16294a]/30 border-t border-b border-white/5 relative">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-[#f6b80c] font-bold text-xs tracking-widest uppercase block mb-2">Acelere seus Resultados</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white">Leve 2 Bônus Exclusivos Inclusos</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#0d1b33] border-2 border-[#f6b80c]/20 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="absolute top-3 right-3 bg-[#f6b80c] text-[#060c1a] text-[10px] font-black px-2 py-0.5 rounded uppercase">Grátis</span>
+                    <h4 class="text-[#ffe28a] font-extrabold text-xl mb-1">🎁 Bônus 1: 50 Frases Coringa</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">Estruturas gramaticais e conectivos de alto nível prontos, adaptáveis para introduzir argumentos em virtualmente qualquer tema.</p>
+                </div>
+                <div class="bg-[#0d1b33] border-2 border-[#f6b80c]/20 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="absolute top-3 right-3 bg-[#f6b80c] text-[#060c1a] text-[10px] font-black px-2 py-0.5 rounded uppercase">Grátis</span>
+                    <h4 class="text-[#ffe28a] font-extrabold text-xl mb-1">🎁 Bônus 2: 30 Repertórios Prontos</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">Referências legítimas e produtivas que enriquecem sua argumentação e sobem sua nota nas competências 2 e 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DA TRANSFORMAÇÃO (ANTES X DEPOIS) -->
+    <section class="py-20 max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-12">Veja a virada de chave no seu estudo</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-[#0d1b33] p-8 rounded-2xl border border-white/5 shadow-2xl">
+            <div class="space-y-3 opacity-60">
+                <span class="text-red-400 font-bold tracking-widest text-xs uppercase block">Como é hoje (Sem Método)</span>
+                <p class="text-slate-300 italic text-base">"Passava horas olhando para a folha em branco, escrevia três linhas, riscava tudo e sentia que não conseguiria passar da introdução."</p>
+            </div>
+            <div class="space-y-3 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+                <span class="text-[#10b981] font-bold tracking-widest text-xs uppercase block">Depois do Método 900+</span>
+                <p class="text-white font-semibold text-lg">"Consegue estruturar o esqueleto completo da redação de forma rápida, organizada e segura em menos de 10 minutos."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DA OFERTA IRRECUSÁVEL -->
+    <section id="oferta" class="py-20 bg-gradient-to-b from-[#0d1b33] to-[#060c1a] border-t border-white/10 scroll-mt-6">
+        <div class="max-w-md mx-auto px-4 text-center space-y-6">
+            <div class="bg-[#10b981]/10 text-[#10b981] inline-block px-4 py-1 rounded-full text-xs font-bold uppercase border border-[#10b981]/20 tracking-wider">
+                🔒 Compra 100% Segura & Acesso Vitalício
+            </div>
+            <h3 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">Método Redação 900+</h3>
+            <p class="text-slate-400 text-sm">Adquirindo hoje você leva o guia estratégico estruturado + o pacote completo de bônus exclusivos.</p>
+
+            <div class="bg-[#112240] p-6 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+                <div class="text-slate-400 text-sm">Preço original padrão: <span class="line-through text-red-400">R$ 79</span></div>
+                <div class="space-y-1">
+                    <span class="text-xs text-[#10b981] font-bold block uppercase tracking-widest">Preço promocional à vista</span>
+                    <div class="text-5xl font-black text-white tracking-tight">
+                        <span class="text-2xl font-medium text-[#f6b80c] mr-1">R$</span>37,99
+                    </div>
+                    <span class="text-xs text-slate-400 block">à vista ou em até 12x no cartão</span>
+                </div>
+                
+                <!-- Botão direcionado para o Gateway de Pagamento (link vem de MISSAOVEST_CONFIG.checkoutUrl no <head>) -->
+                <a id="checkout-cta" href="#" class="block w-full bg-gradient-to-b from-[#10b981] to-[#059669] text-white font-black text-lg py-4 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-wide">
+                    Quero destravar minha redação
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 text-left p-4 bg-[#060c1a] rounded-xl border border-white/5">
+                <div class="text-3xl">🛡️</div>
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider">Satisfação Garantida por 7 Dias</h5>
+                    <p class="text-slate-400 text-[11px] leading-relaxed mt-0.5">Se por qualquer motivo você não gostar do método, basta enviar um e-mail em até 7 dias e devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ COMPLETO (SUPORTE, CONTATO E REGRAS META ADS) -->
+    <footer class="bg-[#040811] text-slate-400 py-12 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            
+            <!-- Coluna 1: Branding e CNPJ -->
+            <div class="space-y-3">
+                <p class="font-bold text-white text-lg tracking-wider">MISSÃO<span class="text-[#f6b80c]">VEST</span></p>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    O método definitivo para destravar sua nota no ENEM 2026. Feito de estudante para estudante.
+                </p>
+                <!-- ⚠️ TODO: troque pelo CNPJ real da empresa antes de publicar.
+                     Exibir CNPJ é exigência legal pra cobrança/checkout no Brasil
+                     e a maioria dos gateways de pagamento também pede isso no cadastro. -->
+                <p class="text-[11px] text-slate-600 block pt-2">
+                    CNPJ: 00.000.000/0001-00<br>
+                    © 2026 MissãoVest. Todos os direitos reservados.
+                </p>
+            </div>
+
+            <!-- Coluna 2: Suporte e Contato -->
+            <div class="space-y-3">
+                <h5 class="text-white font-bold text-sm uppercase tracking-wide">Suporte ao Aluno</h5>
+                <ul class="text-xs space-y-2 text-slate-400">
+                    <li class="flex items-center justify-center md:justify-start gap-2">
+                        <span>📧</span> <a href="mailto:suporte@missaovest.com.br" class="hover:text-[#f6b80c] transition-colors">suporte@missaovest.com.br</a>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start gap-2">
+                        <!-- ⚠️ TODO: troque pelo número real (formato 55 + DDD + número, só dígitos) -->
+                        <span>💬</span> <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="hover:text-[#10b981] transition-colors font-semibold">Chamar no WhatsApp</a>
+                    </li>
+                    <li class="text-slate-500 text-[11px]">
+                        Horário de atendimento:<br>Seg a Sex, das 09h às 18h
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3: Links Legais Obrigatórios -->
+            <div class="space-y-3">
+                <h5 class="text-white font-bold text-sm uppercase tracking-wide">Informações Legais</h5>
+                <ul class="text-xs space-y-2">
+                    <li><a href="/termos" class="hover:text-[#f6b80c] transition-colors block">Termos de Uso</a></li>
+                    <li><a href="/privacidade" class="hover:text-[#f6b80c] transition-colors block">Políticas de Privacidade</a></li>
+                    <li><a href="/reembolso" class="hover:text-[#f6b80c] transition-colors block">Política de Reembolso</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Termo de Isenção de Responsabilidade (Evita bloqueios no Meta/Google Ads) -->
+        <div class="max-w-4xl mx-auto px-4 mt-8 pt-8 border-t border-white/5 text-center text-[10px] text-slate-600 space-y-2">
+            <p>
+                Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial da META PLATFORMS, Inc.
+            </p>
+            <p>
+                Os resultados podem variar de pessoa para pessoa. Todas as ferramentas e estratégias oferecidas são para fins educacionais e de preparação para o exame do ENEM 2026.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         ATIVA O BOTÃO DE CHECKOUT COM BASE NA CONFIGURAÇÃO DO <head>
+         ============================================================
+         Por que não colocar o link direto no href? Pra existir um
+         único lugar (MISSAOVEST_CONFIG.checkoutUrl) pra editar, e
+         pra evitar publicar a página com um link morto/falso por
+         esquecimento — se não tiver sido configurado, o clique
+         avisa em vez de levar pra um link quebrado.
+         ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var cta = document.getElementById('checkout-cta');
+            if (!cta) return;
+            var cfg = window.MISSAOVEST_CONFIG || {};
+            var url = cfg.checkoutUrl || '';
+            var isConfigured = url && url.indexOf('COLOQUE_AQUI') === -1;
+
+            if (isConfigured) {
+                cta.setAttribute('href', url);
+                cta.setAttribute('target', '_blank');
+                cta.setAttribute('rel', 'noopener noreferrer');
+            } else {
+                cta.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    alert('Configure o link do checkout em MISSAOVEST_CONFIG.checkoutUrl (no <head> do HTML) antes de publicar a página.');
+                });
+            }
+        });
+    </script>
+
+    <!-- ============================================================
+         📋 SE FOR ADICIONAR PIXEL/ANALYTICS (Meta Pixel, GA4, etc.)
+         ============================================================
+         Pela LGPD, scripts que coletam dados do visitante (pixel,
+         analytics, cookies de rastreamento) exigem aviso/consentimento
+         claro antes de carregar — normalmente um banner de cookies
+         com opção de aceitar/recusar. Hoje esta página não carrega
+         nenhum script de rastreamento, então não há esse requisito
+         ainda; mas se adicionar, inclua o banner de consentimento
+         junto e atualize a Política de Privacidade linkada no rodapé.
+         ============================================================ -->
+
+</body>
+</html>
