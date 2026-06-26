@@ -33,34 +33,15 @@
     </script>
 
     <!-- ============================================================
-         🔒 CONFIGURAÇÃO DO GATEWAY DE PAGAMENTO — EDITE SÓ AQUI
-         ============================================================
-         Troque "COLOQUE_AQUI_O_LINK_DO_SEU_CHECKOUT" pelo link de
-         checkout do seu gateway (Mercado Pago, PagSeguro, Stripe
-         Checkout, Hotmart, Kiwify, Eduzz, etc).
-
-         REGRA DE OURO: esta página é 100% client-side (roda só no
-         navegador). Qualquer coisa escrita aqui é visível pra
-         qualquer pessoa que abrir "Ver código-fonte". Por isso:
-
-         ✅ PODE colocar aqui: link público de checkout (página de
-            pagamento do gateway), client_id/public_key públicas
-            (quando o próprio gateway chama isso de "pública" ou
-            "publishable key" — ex: Stripe publishable key).
-
-         ❌ NUNCA coloque aqui: secret key, access token de API,
-            client_secret, senha de banco, chave de webhook, ou
-            qualquer credencial que o gateway chame de "secreta"
-            ou "privada". Isso só pode existir no backend/servidor,
-            normalmente carregado de variáveis de ambiente (.env).
-            Veja o arquivo .env.example incluso para o padrão
-            recomendado caso você crie um backend (ex: para gerar a
-            sessão de checkout via API antes de redirecionar o
-            cliente, em vez de usar um link fixo).
+         ℹ️ O link de checkout agora é editado DIRETO no botão
+         #checkout-cta (na seção "OFERTA IRRECUSÁVEL"), não mais
+         aqui. Esse objeto MISSAOVEST_CONFIG não é mais lido por
+         nenhum script — pode remover este bloco com segurança, ou
+         deixar como anotação de qual é o link de checkout atual.
          ============================================================ -->
     <script>
         window.MISSAOVEST_CONFIG = {
-            checkoutUrl: https://pay.cakto.com.br/v3rjk4u_936727
+            checkoutUrl: "https://pay.cakto.com.br/v3rjk4u_936727"
         };
     </script>
 </head>
@@ -226,8 +207,11 @@
                     <span class="text-xs text-slate-400 block">à vista ou em até 12x no cartão</span>
                 </div>
                 
-                <!-- Botão direcionado para o Gateway de Pagamento (link vem de MISSAOVEST_CONFIG.checkoutUrl no <head>) -->
-                <a id="checkout-cta" href="#" class="block w-full bg-gradient-to-b from-[#10b981] to-[#059669] text-white font-black text-lg py-4 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-wide">
+                <!-- Botão direcionado para o Gateway de Pagamento.
+                     O href já vem com o link real (não depende só do JS abaixo).
+                     O script no final do arquivo só garante target="_blank"/rel
+                     e funciona como camada extra de segurança, não como única via. -->
+                <a id="checkout-cta" href="https://pay.cakto.com.br/v3rjk4u_936727" target="_blank" rel="noopener noreferrer" class="block w-full bg-gradient-to-b from-[#10b981] to-[#059669] text-white font-black text-lg py-4 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-wide">
                     Quero destravar minha redação
                 </a>
             </div>
@@ -246,17 +230,13 @@
     <footer class="bg-[#040811] text-slate-400 py-12 border-t border-white/5">
         <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             
-            <!-- Coluna 1: Branding e CNPJ -->
+            <!-- Coluna 1: Branding -->
             <div class="space-y-3">
                 <p class="font-bold text-white text-lg tracking-wider">MISSÃO<span class="text-[#f6b80c]">VEST</span></p>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     O método definitivo para destravar sua nota no ENEM 2026. Feito de estudante para estudante.
                 </p>
-                <!-- ⚠️ TODO: troque pelo CNPJ real da empresa antes de publicar.
-                     Exibir CNPJ é exigência legal pra cobrança/checkout no Brasil
-                     e a maioria dos gateways de pagamento também pede isso no cadastro. -->
                 <p class="text-[11px] text-slate-600 block pt-2">
-                    CNPJ: 00.000.000/0001-00<br>
                     © 2026 MissãoVest. Todos os direitos reservados.
                 </p>
             </div>
@@ -269,8 +249,7 @@
                         <span>📧</span> <a href="mailto:suporte@missaovest.com.br" class="hover:text-[#f6b80c] transition-colors">suporte@missaovest.com.br</a>
                     </li>
                     <li class="flex items-center justify-center md:justify-start gap-2">
-                        <!-- ⚠️ TODO: troque pelo número real (formato 55 + DDD + número, só dígitos) -->
-                        <span>💬</span> <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="hover:text-[#10b981] transition-colors font-semibold">Chamar no WhatsApp</a>
+                        <span>💬</span> <a href="https://wa.me/5512997974392" target="_blank" rel="noopener noreferrer" class="hover:text-[#10b981] transition-colors font-semibold">Chamar no WhatsApp</a>
                     </li>
                     <li class="text-slate-500 text-[11px]">
                         Horário de atendimento:<br>Seg a Sex, das 09h às 18h
@@ -282,9 +261,9 @@
             <div class="space-y-3">
                 <h5 class="text-white font-bold text-sm uppercase tracking-wide">Informações Legais</h5>
                 <ul class="text-xs space-y-2">
-                    <li><a href="/termos" class="hover:text-[#f6b80c] transition-colors block">Termos de Uso</a></li>
-                    <li><a href="/privacidade" class="hover:text-[#f6b80c] transition-colors block">Políticas de Privacidade</a></li>
-                    <li><a href="/reembolso" class="hover:text-[#f6b80c] transition-colors block">Política de Reembolso</a></li>
+                    <li><a href="termos.html" class="hover:text-[#f6b80c] transition-colors block">Termos de Uso</a></li>
+                    <li><a href="privacidade.html" class="hover:text-[#f6b80c] transition-colors block">Políticas de Privacidade</a></li>
+                    <li><a href="reembolso.html" class="hover:text-[#f6b80c] transition-colors block">Política de Reembolso</a></li>
                 </ul>
             </div>
         </div>
@@ -301,34 +280,16 @@
     </footer>
 
     <!-- ============================================================
-         ATIVA O BOTÃO DE CHECKOUT COM BASE NA CONFIGURAÇÃO DO <head>
-         ============================================================
-         Por que não colocar o link direto no href? Pra existir um
-         único lugar (MISSAOVEST_CONFIG.checkoutUrl) pra editar, e
-         pra evitar publicar a página com um link morto/falso por
-         esquecimento — se não tiver sido configurado, o clique
-         avisa em vez de levar pra um link quebrado.
+         ℹ️ O botão de checkout agora usa href estático direto (veja a
+         seção "OFERTA IRRECUSÁVEL" acima). Esse script foi removido
+         porque a versão anterior dependia 100% do JavaScript rodar
+         corretamente após o carregamento da página para funcionar —
+         e havia o risco de isso falhar silenciosamente em navegadores
+         internos (Instagram/Facebook in-app browser), deixando o
+         botão sem destino nenhum. Se quiser trocar o link do checkout
+         no futuro, edite direto o href do botão #checkout-cta acima.
          ============================================================ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var cta = document.getElementById('checkout-cta');
-            if (!cta) return;
-            var cfg = window.MISSAOVEST_CONFIG || {};
-            var url = cfg.checkoutUrl || '';
-            var isConfigured = url && url.indexOf('COLOQUE_AQUI') === -1;
 
-            if (isConfigured) {
-                cta.setAttribute('href', url);
-                cta.setAttribute('target', '_blank');
-                cta.setAttribute('rel', 'noopener noreferrer');
-            } else {
-                cta.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    alert('Configure o link do checkout em MISSAOVEST_CONFIG.checkoutUrl (no <head> do HTML) antes de publicar a página.');
-                });
-            }
-        });
-    </script>
 
     <!-- ============================================================
          📋 SE FOR ADICIONAR PIXEL/ANALYTICS (Meta Pixel, GA4, etc.)
